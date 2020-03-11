@@ -114,6 +114,7 @@ def summarize_episodes(episodes, new_episodes=None):
                 policy_rewards[policy_id].append(reward)
         for k, v in episode.hist_data.items():
             hist_stats[k] += v
+
     if episode_rewards:
         min_reward = min(episode_rewards)
         max_reward = max(episode_rewards)
@@ -122,10 +123,7 @@ def summarize_episodes(episodes, new_episodes=None):
         min_reward = float("nan")
         max_reward = float("nan")
         avg_reward = float("nan")
-    if episode_lengths:
-        avg_length = np.mean(episode_lengths)
-    else:
-        avg_length = float("nan")
+    avg_length = np.mean(episode_lengths) if episode_lengths else float("nan")
 
     # Show as histogram distributions.
     hist_stats["episode_reward"] = episode_rewards
