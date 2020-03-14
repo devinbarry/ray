@@ -1,6 +1,6 @@
 ARG PYTHON_VERSION=3.7.6-buster
 
-FROM python:${PYTHON_VERSION} as builder
+FROM python:${PYTHON_VERSION}
 
 RUN apt-get update && apt-get -y install curl git gnupg2
 
@@ -17,5 +17,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip
 
 RUN git clone https://github.com/devinbarry/ray.git \
-    && cd ray/python \
-    && python setup.py bdist bdist_wheel
+    && cd ray \
+    && git checkout develop \
+    && cd python \
+    && python setup.py bdist_wheel
