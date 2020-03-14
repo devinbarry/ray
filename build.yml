@@ -1,0 +1,9 @@
+---
+
+version: '3.7'
+services:
+  ray:
+    build:
+      context: docker/build/
+      dockerfile: py37.Dockerfile
+    image: softwrdev/ray:latest-py37
