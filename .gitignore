@@ -173,3 +173,6 @@ tools/prometheus*
 
 # ray project files
 project-id
+
+# Env file for Docker build
+.env

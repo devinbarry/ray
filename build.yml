@@ -6,4 +6,8 @@ services:
     build:
       context: docker/build/
       dockerfile: py37.Dockerfile
+      args:
+        GEMFURY_TOKEN: ${GEMFURY_PUSH_TOKEN}
     image: softwrdev/ray:latest-py37
+    env_file:
+      - .env
