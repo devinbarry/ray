@@ -1,4 +1,3 @@
-ARG GEMFURY_TOKEN
 ARG PYTHON_VERSION=3.7.6-buster
 
 FROM python:${PYTHON_VERSION}
@@ -14,6 +13,7 @@ RUN curl -fsSL https://bazel.build/bazel-release.pub.gpg | apt-key add - \
 
 WORKDIR /ray
 
+ARG GEMFURY_TOKEN
 ENV PYTHONUNBUFFERED 1
 
 # Upgrade to latest pip
@@ -27,4 +27,4 @@ RUN git clone https://github.com/devinbarry/ray.git \
     && python setup.py bdist_wheel
 
 # Push build up to Gemfury
-RUN find ray/python/dist -mindepth 1 -maxdepth 1 -type f -print0 | xargs -0I{} curl -F package=@{} https://${GEMFURY_TOKEN}@push.fury.io/pythonista/
+RUN find ray/python/dist -mindepth 1 -maxdepth 1 -type f -print0 | xargs -0I{} curl -sSL -F package=@{} https://${GEMFURY_TOKEN}@push.fury.io/pythonista/
