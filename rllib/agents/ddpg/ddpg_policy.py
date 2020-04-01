@@ -421,8 +421,8 @@ class DDPGTFPolicy(DDPGPostprocessing, TFPolicy):
             else:
                 action_out = tf.keras.layers.Dense(
                     units=hidden, activation=activation)(action_out)
-            action_out = tf.keras.layers.Dense(
-                units=action_space.shape[0], activation=None)(action_out)
+        action_out = tf.keras.layers.Dense(
+            units=action_space.shape[0], activation=None)(action_out)
 
         # Use sigmoid to scale to [0,1], but also double magnitude of input to
         # emulate behaviour of tanh activation used in DDPG and TD3 papers.
